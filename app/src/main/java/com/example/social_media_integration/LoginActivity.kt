@@ -20,16 +20,25 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        createSignInIntent()
+        if(FirebaseAuth.getInstance().currentUser == null) {
+            createSignInIntent()
+        }
+        else{
+
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+
+        }
 
     }
 
     private fun createSignInIntent() {
         val providers = arrayListOf<AuthUI.IdpConfig>(
-            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build(),
             AuthUI.IdpConfig.FacebookBuilder().build(),
             AuthUI.IdpConfig.PhoneBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build()
+
         )
         startActivityForResult(
             AuthUI.getInstance()

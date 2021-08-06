@@ -43,11 +43,13 @@ class MainActivity : AppCompatActivity() {
             binding.txtemail.text = auth.email
             binding.txtPhoneNumber.text = auth.phoneNumber
 
-            Glide.with(this)
-                .load(auth.photoUrl)
-                .fitCenter()
-                //.placeholderDrawable(R.drawable.profile_img)
-                .into(binding.profileImage)
+            if(auth.photoUrl!=null) {
+                Glide.with(this)
+                    .load(auth.photoUrl)
+                    .fitCenter()
+                    //.placeholderDrawable(R.drawable.profile_img)
+                    .into(binding.profileImage)
+            }
         }
 
     }
