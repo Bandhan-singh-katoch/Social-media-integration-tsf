@@ -39,19 +39,9 @@ class MainActivity : AppCompatActivity() {
     private fun createUI(){
 
         auth?.let {
-
-            it.displayName?.let {
-                binding.txtName.text = auth.displayName
-            }
-
-            it.email?.let {
-                binding.txtemail.text = auth.email
-            }
-
-            it.phoneNumber?.let {
-                binding.txtPhoneNumber.text = auth.phoneNumber
-            }
-
+            binding.txtName.text = auth.displayName
+            binding.txtemail.text = auth.email
+            binding.txtPhoneNumber.text = auth.phoneNumber
 
             if(auth.photoUrl!=null) {
                 Glide.with(this)
