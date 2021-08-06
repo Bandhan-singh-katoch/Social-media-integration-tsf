@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Social-Media_Integration</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_app_id">203317925084859</string>
+    <string name="fb_login_protocol_scheme">fb203317925084859</string>
+    <string name="facebook_application_id">203317925084859</string>
+    <string name="bandhan_singh">Bandhan singh</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+
+</resources>
