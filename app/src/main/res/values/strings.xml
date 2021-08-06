@@ -9,5 +9,10 @@
     <string name="logout">Logout</string>
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
+    <string name="name">Name :</string>
+    <string name="hash">--</string>
+    <string name="emailN">Email :</string>
+    <string name="phone">Phone:</string>
+    <string name="na">NA</string>
 
 </resources>
