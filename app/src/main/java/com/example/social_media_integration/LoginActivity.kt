@@ -51,19 +51,11 @@ class LoginActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
                 user?.displayName?.let { Log.d("USERDATA", it) }
                 val intent = Intent(this,MainActivity::class.java)
-//                val image = user?.photoUrl
-//
-//                intent.putExtra("USERNAME", user?.displayName)
-//                intent.putExtra("USEREMAIL",user?.email)
-//                intent.putExtra("USERPHONE",user?.phoneNumber)
-//                intent.putExtra("USERPROVIDER",user?.providerId)
-//                intent.putExtra("USERIMAGE",user?.photoUrl)
                 startActivity(intent)
 
             }
 
             else{
-
                 if(response == null){
                     finish()
                 }
@@ -73,16 +65,12 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 if(response?.getError()?.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    Toast.makeText(this, response?.error?.errorCode.toString(), Toast.LENGTH_LONG)
+                    Toast.makeText(this, response.error?.errorCode.toString(), Toast.LENGTH_LONG)
                         .show()
-                    Log.d("ERRORCODE", response?.error?.errorCode.toString())
+                    Log.d("ERRORCODE", response.error?.errorCode.toString())
                     return
                 }
             }
         }
     }
-
-
-
-
 }

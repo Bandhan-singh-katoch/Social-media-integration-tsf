@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-
     }
 
     private fun createUI(){
