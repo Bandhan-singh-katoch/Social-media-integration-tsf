@@ -3,7 +3,6 @@ package com.example.social_media_integration
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -19,10 +18,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //if not logged in then open login page else show profile page (main activity)
+
         if(FirebaseAuth.getInstance().currentUser == null) {
             createSignInIntent()
         }
-
         else{
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun createSignInIntent() {
-        val providers = arrayListOf<AuthUI.IdpConfig>(
+        val providers = arrayListOf(
             AuthUI.IdpConfig.GoogleBuilder().build(),
             AuthUI.IdpConfig.FacebookBuilder().build(),
             AuthUI.IdpConfig.PhoneBuilder().build(),
@@ -53,21 +53,19 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == RC_SIGN_IN){
-            var response = IdpResponse.fromResultIntent(data)
+            val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK){
-                val user = FirebaseAuth.getInstance().currentUser
-                user?.displayName?.let { Log.d("USERDATA", it) }
                 val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
-
             }
 
             else{
                 if(response == null){
                     finish()
                 }
-                if (response?.getError()?.getErrorCode() == ErrorCodes.NO_NETWORK) {
+
+                if (response?.error?.errorCode == ErrorCodes.NO_NETWORK) {
                     return
                 }
 

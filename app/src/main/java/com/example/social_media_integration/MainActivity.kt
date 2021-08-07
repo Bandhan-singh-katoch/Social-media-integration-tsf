@@ -19,14 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
-
-        if(auth!=null && intent!=null){
-            createUI()
-        }
-        else{
-            startActivity(Intent(this,LoginActivity::class.java))
-            this.finish()
-        }
+        createUI()
 
         binding.logoutBtn.setOnClickListener {
             AuthUI.getInstance().signOut(this).addOnSuccessListener {
@@ -38,17 +31,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createUI(){
-
         auth?.let {
             binding.txtName.text = auth.displayName
             binding.txtemail.text = auth.email
             binding.txtPhoneNumber.text = auth.phoneNumber
 
-            if(auth.photoUrl!=null) {
+            if(auth.photoUrl!=null) {      // if null shows default image else network image
                 Glide.with(this)
                     .load(auth.photoUrl)
                     .fitCenter()
-                    //.placeholderDrawable(R.drawable.profile_img)
                     .into(binding.profileImage)
             }
         }
@@ -67,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // on clicking back we come out of the app instead of login activity
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
