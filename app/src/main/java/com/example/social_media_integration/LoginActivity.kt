@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -23,11 +22,10 @@ class LoginActivity : AppCompatActivity() {
         if(FirebaseAuth.getInstance().currentUser == null) {
             createSignInIntent()
         }
-        else{
 
+        else{
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
-
         }
 
     }
@@ -56,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == RC_SIGN_IN){
             var response = IdpResponse.fromResultIntent(data)
+
             if (resultCode == Activity.RESULT_OK){
                 val user = FirebaseAuth.getInstance().currentUser
                 user?.displayName?.let { Log.d("USERDATA", it) }
@@ -69,16 +68,9 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 }
                 if (response?.getError()?.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    //Show No Internet Notification
                     return
                 }
 
-                if(response?.getError()?.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    Toast.makeText(this, response.error?.errorCode.toString(), Toast.LENGTH_LONG)
-                        .show()
-                    Log.d("ERRORCODE", response.error?.errorCode.toString())
-                    return
-                }
             }
         }
     }
